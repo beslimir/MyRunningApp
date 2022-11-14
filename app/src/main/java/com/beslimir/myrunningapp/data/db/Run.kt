@@ -1,4 +1,4 @@
-package com.beslimir.myrunningapp.db
+package com.beslimir.myrunningapp.data.db
 
 import android.graphics.Bitmap
 import androidx.room.Entity

@@ -3,7 +3,7 @@ package com.beslimir.myrunningapp.di
 import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.beslimir.myrunningapp.db.RunningDatabase
+import com.beslimir.myrunningapp.data.db.RunningDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,10 +16,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRunningDatabase(app: Application): RoomDatabase {
+    fun provideRunningDatabase(app: Application): RunningDatabase {
         return Room.databaseBuilder(
             app,
-            RoomDatabase::class.java,
+            RunningDatabase::class.java,
             "running_database"
         ).build()
     }

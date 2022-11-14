@@ -1,7 +1,8 @@
-package com.beslimir.myrunningapp
+package com.beslimir.myrunningapp.presentation.main_screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.beslimir.myrunningapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

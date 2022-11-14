@@ -1,4 +1,4 @@
-package com.beslimir.myrunningapp.db
+package com.beslimir.myrunningapp.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

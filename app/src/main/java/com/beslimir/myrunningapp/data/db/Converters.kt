@@ -1,9 +1,8 @@
-package com.beslimir.myrunningapp.db
+package com.beslimir.myrunningapp.data.db
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import java.io.ByteArrayOutputStream
 
 class Converters {

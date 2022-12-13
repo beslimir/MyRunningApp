@@ -2,7 +2,6 @@ package com.beslimir.myrunningapp.di
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.beslimir.myrunningapp.data.db.RunningDatabase
 import dagger.Module
 import dagger.Provides

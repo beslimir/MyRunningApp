@@ -63,7 +63,6 @@ class SetupFragment: Fragment(R.layout.fragment_setup) {
             .putFloat(KEY_WEIGHT, weight.toFloat())
             .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
             .apply()
-        isFirstOpened = false
 
         val toolbarText = "Let's go, $name!"
         (requireActivity() as MainActivity).mainBinding.tvToolbarTitle.text = toolbarText

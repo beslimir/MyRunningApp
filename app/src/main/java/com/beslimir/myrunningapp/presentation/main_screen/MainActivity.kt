@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         mainBinding.bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        mainBinding.bottomNavigationView.setOnItemReselectedListener {
+            //no reloading the same fragment
+        }
 
         navigateToTrackingFragmentIfNeeded(intent)
 

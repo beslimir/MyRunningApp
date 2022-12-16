@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beslimir.myrunningapp.R
 import com.beslimir.myrunningapp.adapters.RunAdapter
 import com.beslimir.myrunningapp.databinding.FragmentRunBinding
+import com.beslimir.myrunningapp.other.SortType
 import com.beslimir.myrunningapp.util.TrackingUtility
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -31,7 +33,29 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
         requestPermissions()
         setupRecyclerView()
 
-        mainViewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+        when (mainViewModel.sortType) {
+            SortType.DATE -> runBinding.spFilter.setSelection(0)
+            SortType.DISTANCE -> runBinding.spFilter.setSelection(1)
+            SortType.CALORIES_BURNED -> runBinding.spFilter.setSelection(2)
+            SortType.RUNNING_TIME -> runBinding.spFilter.setSelection(3)
+            SortType.AVG_SPEED -> runBinding.spFilter.setSelection(4)
+        }
+
+        runBinding.spFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                when (pos) {
+                    0 -> mainViewModel.sortRuns(SortType.DATE)
+                    1 -> mainViewModel.sortRuns(SortType.DISTANCE)
+                    2 -> mainViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    3 -> mainViewModel.sortRuns(SortType.RUNNING_TIME)
+                    4 -> mainViewModel.sortRuns(SortType.AVG_SPEED)
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+
+        mainViewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })
 
@@ -39,7 +63,7 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
     }
-    
+
 
     private fun setupRecyclerView() = runBinding.rvRuns.apply {
         runAdapter = RunAdapter()

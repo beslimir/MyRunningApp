@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.beslimir.myrunningapp.R
 import com.beslimir.myrunningapp.data.db.Run
@@ -116,6 +118,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         trackingBinding.btnFinishRun.setOnClickListener {
             zoomToSeeWholeTrack()
             endRunAndSaveToDb()
+            myMenu?.getItem(0)?.isVisible = false
         }
 
         trackingBinding.mapView.getMapAsync { googleMap ->

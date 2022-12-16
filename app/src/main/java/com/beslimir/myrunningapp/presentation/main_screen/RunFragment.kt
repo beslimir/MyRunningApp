@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.beslimir.myrunningapp.R
+import com.beslimir.myrunningapp.adapters.RunAdapter
 import com.beslimir.myrunningapp.databinding.FragmentRunBinding
 import com.beslimir.myrunningapp.util.TrackingUtility
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,16 +22,29 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
 
     private val mainViewModel: MainViewModel by viewModels()
     lateinit var runBinding: FragmentRunBinding
+    private lateinit var runAdapter: RunAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         runBinding = FragmentRunBinding.bind(view)
 
         requestPermissions()
+        setupRecyclerView()
+
+        mainViewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+            runAdapter.submitList(it)
+        })
 
         runBinding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+    }
+    
+
+    private fun setupRecyclerView() = runBinding.rvRuns.apply {
+        runAdapter = RunAdapter()
+        adapter = runAdapter
+        layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun requestPermissions() {

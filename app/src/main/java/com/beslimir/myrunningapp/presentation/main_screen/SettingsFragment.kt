@@ -23,6 +23,8 @@ class SettingsFragment: Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         settingsBinding = FragmentSettingsBinding.bind(view)
 
+        loadFieldsFromSharedPrefs()
+
         settingsBinding.btnApplyChanges.setOnClickListener {
             val success = applyChangesToSharedPref()
             if (success) {

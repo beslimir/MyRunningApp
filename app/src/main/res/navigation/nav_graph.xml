@@ -23,7 +23,7 @@
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.beslimir.myrunningapp.presentation.statistics.StatisticsFragment"
+        android:name="com.beslimir.myrunningapp.presentation.main_screen.StatisticsFragment"
         android:label="StatisticsFragment" />
     <fragment
         android:id="@+id/trackingFragment"
